@@ -3,6 +3,11 @@ import {tileRecommendationStyle} from './tileRecommendationStyle.js';
 import '../button/AppButton';
 
 export class AppTileRecommendation extends LitElement {
+  static get properties() {
+    return {
+      data: Object,
+    };
+  }
   static get styles() {
     return [tileRecommendationStyle];
   }
@@ -14,8 +19,8 @@ export class AppTileRecommendation extends LitElement {
           alt="Song cover"
           class="tile__cover"
         />
-        <h3 class="tile__title">Song name</h3>
-        <div class="tile__duration">2:59</div>
+        <h3 class="tile__title">${this.data.name}</h3>
+        <div class="tile__duration">${this.data.time}</div>
         <app-button class="tile__button" variant="rounded">Add to playlist +</app-button>
       </div>
     `;
