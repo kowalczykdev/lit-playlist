@@ -1,11 +1,50 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Lit Starter Kit</title>
+    <title>Lit Playlist</title>
+    <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="node_modules/lit/polyfill-support.js"></script>
+    <script type="module" src="src/app-main.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./src/styles/reset.css" />
+    <style>
+      :root {
+        --c-white: #fff;
+        --c-black: #000;
+        --c-dark: #121212;
+        --c-gray-1: #181818;
+        --c-gray-2: #212121;
+        --c-gray-3: #535353;
+        --c-gray-4: #b3b3b3;
+        --c-green-1: #1db954;
+        --c-green-2: #1ba349;
+
+        --fw-normal: 400;
+        --fw-bold: 700;
+
+        --space: 4px;
+      }
+
+      body {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1rem;
+        font-weight: 400;
+        font-style: var(--fw-normal);
+        line-height: 1.5;
+        background-color: var(--c-dark);
+        color: var(--c-white);
+      }
+    </style>
   </head>
   <body>
-    <a href="/dev/index.html">Component Demo</a>
+    <!--  <app-navbar></app-navbar>-->
+    <app-main> </app-main>
   </body>
 </html>
