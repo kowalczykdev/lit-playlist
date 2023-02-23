@@ -18,7 +18,12 @@ export const tileRecommendationStyle = css`
     flex-direction: column;
   }
 
-  .tile:hover {
+
+  .tile--available-to-add {
+    transition: background-color 0.3s ease;
+  }
+
+  .tile--available-to-add:hover {
     background: var(--c-gray-3);
   }
 
@@ -42,5 +47,11 @@ export const tileRecommendationStyle = css`
     display: block;
     text-align: center;
     margin-top: auto;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .tile--available-to-add:hover .tile__button {
+    opacity: 1;
   }
 `;

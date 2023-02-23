@@ -1,6 +1,7 @@
 import {html, LitElement, nothing} from 'lit';
 import {tileRecommendationStyle} from './tileRecommendationStyle.js';
 import '../button/AppButton';
+import {classMap} from 'lit/directives/class-map.js';
 
 export class AppTileRecommendation extends LitElement {
   static get properties() {
@@ -13,6 +14,8 @@ export class AppTileRecommendation extends LitElement {
     return [tileRecommendationStyle];
   }
   render() {
+    const classes = {tile: true, 'tile--available-to-add': this.availableToAdd};
+
     const button = this.availableToAdd
       ? html`<app-button
           class="tile__button"
@@ -23,7 +26,7 @@ export class AppTileRecommendation extends LitElement {
       : nothing;
 
     return html`
-      <div class="tile">
+      <div class=${classMap(classes)}>
         <img
           src="https://picsum.photos/160"
           alt="Song cover"

@@ -34,5 +34,8 @@ export const buttonStyle = css`
     border: none;
     cursor: pointer;
     font-weight: var(--fw-bold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `;

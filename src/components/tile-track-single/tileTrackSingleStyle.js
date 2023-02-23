@@ -37,7 +37,7 @@ export const tileTrackSingleStyle = css`
     flex-direction: column;
     justify-content: space-between;
   }
-  
+
   .tile__button-delete {
     align-self: flex-start;
     margin-left: auto;
@@ -66,5 +66,14 @@ export const tileTrackSingleStyle = css`
     color: var(--c-gray-4);
     line-height: 1;
     margin: 0;
+  }
+
+  .tile__icon {
+    width: calc(var(--space) * 4);
+    height: calc(var(--space) * 4);
+  }
+
+  .tile__icon--red {
+    color: var(--c-red);
   }
 `;
