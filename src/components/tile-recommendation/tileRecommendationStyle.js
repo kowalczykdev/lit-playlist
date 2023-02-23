@@ -12,6 +12,9 @@ export const tileRecommendationStyle = css`
     padding: calc(var(--space) * 4);
     transition: background-color 0.3s ease;
     width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   .tile:hover {
@@ -37,5 +40,6 @@ export const tileRecommendationStyle = css`
   .tile__button {
     display: block;
     text-align: center;
+    margin-top: auto;
   }
 `;

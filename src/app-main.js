@@ -12,8 +12,8 @@ export class AppMain extends LitElement {
   static get properties() {
     return {
       _data: {type: Array, state: true},
-      _error: {type: String, state: true},
       _selectedTrackId: {type: String, state: true},
+      _addedTracksIds: {type: Array, state: true},
     };
   }
   static get styles() {
@@ -24,7 +24,7 @@ export class AppMain extends LitElement {
     super();
     this._data = [];
     this._selectedTrackId = null;
-    this._error = null;
+    this._addedTracksIds = [];
   }
 
   connectedCallback() {
@@ -43,6 +43,7 @@ export class AppMain extends LitElement {
       .then((data) => {
         // console.log(data);
         this._data = data;
+        this._addedTracksIds = data.map((song) => song.songId);
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -68,6 +69,8 @@ export class AppMain extends LitElement {
     const details = this._selectedTrackId
       ? html`<app-track-details
           .trackId=${this._selectedTrackId}
+          .addedTracksIds=${this._addedTracksIds}
+          @songAddToPlaylist=${this._songAddToPlaylistListener}
         ></app-track-details>`
       : html`<h1>Select a track</h1>`;
 
@@ -75,13 +78,12 @@ export class AppMain extends LitElement {
       <app-navbar></app-navbar>
       <div class="main">
         <div class="main__tracks">${list}</div>
-        <div class="main__details">${details}</div>
+        <div>${details}</div>
       </div>
     `;
   }
 
   _selectTrackId(id) {
-    console.log('SELECT');
     this._selectedTrackId = id;
   }
 
@@ -103,6 +105,22 @@ export class AppMain extends LitElement {
 
   _songDeleteListener(e) {
     this._data = this._data.filter((song) => song.songId !== e.detail);
+  }
+
+  _songAddToPlaylistListener(e) {
+    console.log(e.detail);
+    if (this._data.indexOf(e.detail) !== -1) {
+      console.log('ALREADY IN QUEUE');
+      return;
+    }
+    this._data = [...this._data, e.detail];
+    this._updateIDs();
+  }
+
+  _updateIDs() {
+    console.log('UPDATED IDs');
+    this._addedTracksIds = this._data.map((song) => song.songId);
+    console.log(this._addedTracksIds)
   }
 }
 

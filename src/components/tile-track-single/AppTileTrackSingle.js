@@ -28,7 +28,8 @@ export class AppTileTrackSingle extends LitElement {
     </div>`;
   }
 
-  _onUpClick() {
+  _onUpClick(e) {
+    e.stopImmediatePropagation();
     console.log('UP');
     const eventOptions = {
       detail: this.data.songId,
@@ -38,7 +39,8 @@ export class AppTileTrackSingle extends LitElement {
     this.dispatchEvent(new CustomEvent('songMoveUp', eventOptions));
   }
 
-  _onDownClick() {
+  _onDownClick(e) {
+    e.stopImmediatePropagation();
     console.log('DOWN');
     const eventOptions = {
       detail: this.data.songId,
@@ -48,7 +50,8 @@ export class AppTileTrackSingle extends LitElement {
     this.dispatchEvent(new CustomEvent('songMoveDown', eventOptions));
   }
 
-  _onDeleteClick() {
+  _onDeleteClick(e) {
+    e.stopImmediatePropagation();
     console.log('DEL');
     const eventOptions = {
       detail: this.data.songId,

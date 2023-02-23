@@ -20,8 +20,6 @@ export const mainStyles = css`
     display: flex;
     flex-direction: column;
     gap: calc(var(--space) * 4);
-  }
-
-  .main__details {
+    overflow-y: auto;
   }
 `;

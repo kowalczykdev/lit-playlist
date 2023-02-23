@@ -7,6 +7,7 @@ export class AppTrackDetails extends LitElement {
   static get properties() {
     return {
       trackId: Number,
+      addedTracksIds: Array,
       _data: {type: Object, state: true},
       _dataAlbumRecommendations: {type: Array, state: true},
       _dataArtistRecommendations: {type: Array, state: true},
@@ -20,6 +21,7 @@ export class AppTrackDetails extends LitElement {
   constructor() {
     super();
     this.trackId = null;
+    this.addedTracksIds = [];
     this._data = null;
     this._dataAlbumRecommendations = [];
     this._dataArtistRecommendations = [];
@@ -104,7 +106,11 @@ export class AppTrackDetails extends LitElement {
       this._dataAlbumRecommendations.length > 0
         ? html`${this._dataAlbumRecommendations.map(
             (item) => html`
-              <app-tile-recommendation .data=${item}></app-tile-recommendation>
+              <app-tile-recommendation
+                  class="track-details__recommendation"
+                .data=${item}
+                .availableToAdd=${!this.addedTracksIds.includes(item.songId)}
+              ></app-tile-recommendation>
             `
           )}`
         : html`<p>No data</p>`;
@@ -112,7 +118,11 @@ export class AppTrackDetails extends LitElement {
       this._dataAlbumRecommendations.length > 0
         ? html`${this._dataArtistRecommendations.map(
             (item) => html`
-              <app-tile-recommendation .data=${item}></app-tile-recommendation>
+              <app-tile-recommendation
+                  class="track-details__recommendation"
+                .data=${item}
+                .availableToAdd=${!this.addedTracksIds.includes(item.songId)}
+              ></app-tile-recommendation>
             `
           )}`
         : html`<p>No data</p>`;
