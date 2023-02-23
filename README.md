@@ -1,10 +1,11 @@
-# LitElement JavaScript starter
-
-This project includes a sample component using LitElement with JavaScript.
+# LitPlaylist
 
 This template is generated from the `lit-starter-js` package in [the main Lit
 repo](https://github.com/lit/lit). Issues and PRs for this template should be
 filed in that repo.
+
+## Mocking Data
+This project requires mocked data. Tool used for development: [mockoon](https://mockoon.com/)
 
 ## Setup
 
@@ -14,52 +15,13 @@ Install dependencies:
 npm i
 ```
 
-## Testing
-
-This sample modern-web.dev's
-[@web/test-runner](https://www.npmjs.com/package/@web/test-runner) for testing. See the
-[modern-web.dev testing documentation](https://modern-web.dev/docs/test-runner/overview) for
-more information.
-
-Tests can be run with the `test` script, which will run your tests against Lit's development mode (with more verbose errors) as well as against Lit's production mode:
-
-```bash
-npm test
-```
-
-For local testing during development, the `test:dev:watch` command will run your tests in Lit's development mode (with verbose errors) on every change to your source files:
-
-```bash
-npm test:watch
-```
-
-Alternatively the `test:prod` and `test:prod:watch` commands will run your tests in Lit's production mode.
-
 ## Dev Server
-
-This sample uses modern-web.dev's [@web/dev-server](https://www.npmjs.com/package/@web/dev-server) for previewing the project without additional build steps. Web Dev Server handles resolving Node-style "bare" import specifiers, which aren't supported in browsers. It also automatically transpiles JavaScript and adds polyfills to support older browsers. See [modern-web.dev's Web Dev Server documentation](https://modern-web.dev/docs/dev-server/overview/) for more information.
 
 To run the dev server and open the project in a new browser tab:
 
 ```bash
 npm run serve
 ```
-
-There is a development HTML file located at `/dev/index.html` that you can view at http://localhost:8000/dev/index.html. Note that this command will serve your code using Lit's development mode (with more verbose errors). To serve your code against Lit's production mode, use `npm run serve:prod`.
-
-## Editing
-
-If you use VS Code, we highly recommend the [lit-plugin extension](https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin), which enables some extremely useful features for lit-html templates:
-
-- Syntax highlighting
-- Type-checking
-- Code completion
-- Hover-over docs
-- Jump to definition
-- Linting
-- Quick Fixes
-
-The project is setup to recommend lit-plugin to VS Code users if they don't already have it installed.
 
 ## Linting
 
