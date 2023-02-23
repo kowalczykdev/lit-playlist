@@ -15,17 +15,47 @@ export class AppTileTrackSingle extends LitElement {
   render() {
     return html`<div class="tile">
       <div class="tile__buttons">
-        <app-button>UP</app-button>
-        <app-button>DOWN</app-button>
+        <app-button @click=${this._onUpClick}>UP</app-button>
+        <app-button @click=${this._onDownClick}>DOWN</app-button>
       </div>
       <div class="tile__info">
         <h3 class="tile__title">${this.data.name}</h3>
         <h4 class="tile__artist">${this.data.artist}</h4>
       </div>
       <div class="tile__buttons">
-        <app-button>DEL</app-button>
+        <app-button @click=${this._onDeleteClick}>DEL</app-button>
       </div>
     </div>`;
+  }
+
+  _onUpClick() {
+    console.log('UP');
+    const eventOptions = {
+      detail: this.data.songId,
+      bubbles: true,
+      composed: true,
+    };
+    this.dispatchEvent(new CustomEvent('songMoveUp', eventOptions));
+  }
+
+  _onDownClick() {
+    console.log('DOWN');
+    const eventOptions = {
+      detail: this.data.songId,
+      bubbles: true,
+      composed: true,
+    };
+    this.dispatchEvent(new CustomEvent('songMoveDown', eventOptions));
+  }
+
+  _onDeleteClick() {
+    console.log('DEL');
+    const eventOptions = {
+      detail: this.data.songId,
+      bubbles: true,
+      composed: true,
+    };
+    this.dispatchEvent(new CustomEvent('songDelete', eventOptions));
   }
 }
 
