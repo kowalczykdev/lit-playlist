@@ -1,6 +1,6 @@
 # LitPlaylist
 
-This template is generated from the `lit-starter-js` package in [the main Lit
+This project is generated from the `lit-starter-js` package in [the main Lit
 repo](https://github.com/lit/lit). Issues and PRs for this template should be
 filed in that repo.
 
