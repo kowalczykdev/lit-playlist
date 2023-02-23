@@ -5,7 +5,6 @@ export class AppButton extends LitElement {
   static properties = {
     type: {type: String, reflect: true},
     variant: {type: String, reflect: true},
-    classes: {},
   };
 
   static get styles() {
@@ -16,11 +15,10 @@ export class AppButton extends LitElement {
     super();
     this.type = 'button';
     this.variant = 'default';
-    this._buttonId = `button-${Math.random().toString(36).substr(2, 10)}`;
   }
   render() {
     return html`
-      <div class="button" id="${this._buttonId}">
+      <div class="button">
         <slot></slot>
       </div>
     `;

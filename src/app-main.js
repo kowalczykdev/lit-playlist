@@ -29,25 +29,7 @@ export class AppMain extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.fetchPlaylistData();
-  }
-
-  fetchPlaylistData() {
-    fetch(`http://${BASE_PATH}/api/playlist/${1}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(DEFAULT_ERROR_MESSAGE);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        // console.log(data);
-        this._data = data;
-        this._addedSongsIds = data.map((song) => song.songId);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+    this._fetchData();
   }
 
   render() {
@@ -81,6 +63,24 @@ export class AppMain extends LitElement {
         <div>${details}</div>
       </div>
     `;
+  }
+
+  _fetchData() {
+    fetch(`http://${BASE_PATH}/api/playlist/${1}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(DEFAULT_ERROR_MESSAGE);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        this._data = data;
+        this._addedSongsIds = data.map((song) => song.songId);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   }
 
   _selectSongId(id) {
@@ -121,7 +121,7 @@ export class AppMain extends LitElement {
   _updateIDs() {
     console.log('UPDATED IDs');
     this._addedSongsIds = this._data.map((song) => song.songId);
-    console.log(this._addedSongsIds)
+    console.log(this._addedSongsIds);
   }
 }
 

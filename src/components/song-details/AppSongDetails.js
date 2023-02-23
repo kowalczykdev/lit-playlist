@@ -28,6 +28,7 @@ export class AppSongDetails extends LitElement {
   }
 
   updated(_changedProperties) {
+    super.updated(_changedProperties);
     _changedProperties.forEach((oldValue, newValue) => {
       if (newValue === 'songId') {
         this.fetchSongData(this.songId);
@@ -54,43 +55,10 @@ export class AppSongDetails extends LitElement {
 
     result.then((r) => {
       Promise.all([
-        this.fetchAlbumRecommendationsData(r.albumId),
-        this.fetchArtistRecommendationsData(r.artistId),
+        this._fetchAlbumRecommendationsData(r.albumId),
+        this._fetchArtistRecommendationsData(r.artistId),
       ]);
     });
-  }
-  fetchAlbumRecommendationsData(albumId) {
-    return fetch(`http://${BASE_PATH}/api/album/${albumId}/recommendations`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(DEFAULT_ERROR_MESSAGE);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-        this._dataAlbumRecommendations = data;
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  }
-
-  fetchArtistRecommendationsData(artistId) {
-    return fetch(`http://${BASE_PATH}/api/artist/${artistId}/recommendations`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(DEFAULT_ERROR_MESSAGE);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-        this._dataArtistRecommendations = data;
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
   }
 
   render() {
@@ -107,7 +75,7 @@ export class AppSongDetails extends LitElement {
         ? html`${this._dataAlbumRecommendations.map(
             (item) => html`
               <app-tile-recommendation
-                  class="song-details__recommendation"
+                class="song-details__recommendation"
                 .data=${item}
                 .availableToAdd=${!this.addedSongsIds.includes(item.songId)}
               ></app-tile-recommendation>
@@ -119,7 +87,7 @@ export class AppSongDetails extends LitElement {
         ? html`${this._dataArtistRecommendations.map(
             (item) => html`
               <app-tile-recommendation
-                  class="song-details__recommendation"
+                class="song-details__recommendation"
                 .data=${item}
                 .availableToAdd=${!this.addedSongsIds.includes(item.songId)}
               ></app-tile-recommendation>
@@ -142,6 +110,40 @@ export class AppSongDetails extends LitElement {
         </div>
       </div>
     </div>`;
+  }
+
+  _fetchAlbumRecommendationsData(albumId) {
+    return fetch(`http://${BASE_PATH}/api/album/${albumId}/recommendations`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(DEFAULT_ERROR_MESSAGE);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        this._dataAlbumRecommendations = data;
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
+
+  _fetchArtistRecommendationsData(artistId) {
+    return fetch(`http://${BASE_PATH}/api/artist/${artistId}/recommendations`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(DEFAULT_ERROR_MESSAGE);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        this._dataArtistRecommendations = data;
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   }
 }
 
