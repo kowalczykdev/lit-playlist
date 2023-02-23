@@ -22,9 +22,9 @@ export class AppTileTrackSingle extends LitElement {
         <h3 class="tile__title">${this.data.name}</h3>
         <h4 class="tile__artist">${this.data.artist}</h4>
       </div>
-      <div class="tile__buttons">
-        <app-button @click=${this._onDeleteClick}>DEL</app-button>
-      </div>
+      <app-button class="tile__button-delete" @click=${this._onDeleteClick}
+        >DEL</app-button
+      >
     </div>`;
   }
 

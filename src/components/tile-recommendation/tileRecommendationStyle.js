@@ -12,6 +12,7 @@ export const tileRecommendationStyle = css`
     padding: calc(var(--space) * 4);
     transition: background-color 0.3s ease;
     width: 100%;
+    min-height: calc(var(--space) * 78);
     height: 100%;
     display: flex;
     flex-direction: column;

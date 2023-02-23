@@ -98,7 +98,7 @@ export class AppTrackDetails extends LitElement {
       ? html`<div class="track-details__info-current">
           <h1>${this._data.name}</h1>
           <h2>${this._data.artist}</h2>
-          <h3>${this._data.album}</h3>
+          <h3>${this._data.album} (${this._data.albumYearOfRelease})</h3>
         </div>`
       : html`<h1>Please wait</h1>`;
 
