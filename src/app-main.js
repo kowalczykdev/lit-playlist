@@ -2,8 +2,8 @@ import {LitElement, html} from 'lit';
 import './components/navbar/AppNavbar';
 import './components/tile-recommendation/AppTileRecommendation';
 import './components/button/AppButton';
-import './components/tile-track-single/AppTileTrackSingle';
-import './components/track-details/AppTrackDetails';
+import './components/tile-song-single/AppTileSongSingle.js';
+import './components/song-details/AppSongDetails.js';
 import {mainStyles} from './mainStyles.js';
 import {BASE_PATH, DEFAULT_ERROR_MESSAGE} from './util/api.js';
 import {moveElement} from './util/util.js';
@@ -12,8 +12,8 @@ export class AppMain extends LitElement {
   static get properties() {
     return {
       _data: {type: Array, state: true},
-      _selectedTrackId: {type: String, state: true},
-      _addedTracksIds: {type: Array, state: true},
+      _selectedSongId: {type: String, state: true},
+      _addedSongsIds: {type: Array, state: true},
     };
   }
   static get styles() {
@@ -23,8 +23,8 @@ export class AppMain extends LitElement {
   constructor() {
     super();
     this._data = [];
-    this._selectedTrackId = null;
-    this._addedTracksIds = [];
+    this._selectedSongId = null;
+    this._addedSongsIds = [];
   }
 
   connectedCallback() {
@@ -43,7 +43,7 @@ export class AppMain extends LitElement {
       .then((data) => {
         // console.log(data);
         this._data = data;
-        this._addedTracksIds = data.map((song) => song.songId);
+        this._addedSongsIds = data.map((song) => song.songId);
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -55,36 +55,36 @@ export class AppMain extends LitElement {
       this._data.length > 0
         ? html`${this._data.map(
             (item) => html`
-              <app-tile-track-single
+              <app-tile-song-single
                 .data=${item}
-                @click=${() => this._selectTrackId(item.songId)}
+                @click=${() => this._selectSongId(item.songId)}
                 @songMoveUp=${this._songMoveUpListener}
                 @songMoveDown=${this._songMoveDownListener}
                 @songDelete=${this._songDeleteListener}
-              ></app-tile-track-single>
+              ></app-tile-song-single>
             `
           )}`
-        : html`<p>No tracks found.</p>`;
+        : html`<p>No songs found.</p>`;
 
-    const details = this._selectedTrackId
-      ? html`<app-track-details
-          .trackId=${this._selectedTrackId}
-          .addedTracksIds=${this._addedTracksIds}
+    const details = this._selectedSongId
+      ? html`<app-song-details
+          .songId=${this._selectedSongId}
+          .addedSongsIds=${this._addedSongsIds}
           @songAddToPlaylist=${this._songAddToPlaylistListener}
-        ></app-track-details>`
-      : html`<h1>Select a track</h1>`;
+        ></app-song-details>`
+      : html`<h1>Select a song</h1>`;
 
     return html`
       <app-navbar></app-navbar>
       <div class="main">
-        <div class="main__tracks">${list}</div>
+        <div class="main__songs">${list}</div>
         <div>${details}</div>
       </div>
     `;
   }
 
-  _selectTrackId(id) {
-    this._selectedTrackId = id;
+  _selectSongId(id) {
+    this._selectedSongId = id;
   }
 
   _songMoveUpListener(e) {
@@ -105,6 +105,7 @@ export class AppMain extends LitElement {
 
   _songDeleteListener(e) {
     this._data = this._data.filter((song) => song.songId !== e.detail);
+    this._updateIDs();
   }
 
   _songAddToPlaylistListener(e) {
@@ -119,8 +120,8 @@ export class AppMain extends LitElement {
 
   _updateIDs() {
     console.log('UPDATED IDs');
-    this._addedTracksIds = this._data.map((song) => song.songId);
-    console.log(this._addedTracksIds)
+    this._addedSongsIds = this._data.map((song) => song.songId);
+    console.log(this._addedSongsIds)
   }
 }
 

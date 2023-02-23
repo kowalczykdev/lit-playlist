@@ -1,15 +1,15 @@
 import {html, LitElement, svg} from 'lit';
-import {tileTrackSingleStyle} from './tileTrackSingleStyle.js';
+import {tileSongSingleStyle} from './tileSongSingleStyle.js';
 import '../button/AppButton';
 
-export class AppTileTrackSingle extends LitElement {
+export class AppTileSongSingle extends LitElement {
   static get properties() {
     return {
       data: Object,
     };
   }
   static get styles() {
-    return [tileTrackSingleStyle];
+    return [tileSongSingleStyle];
   }
 
   render() {
@@ -66,4 +66,4 @@ export class AppTileTrackSingle extends LitElement {
   }
 }
 
-window.customElements.define('app-tile-track-single', AppTileTrackSingle);
+window.customElements.define('app-tile-song-single', AppTileSongSingle);

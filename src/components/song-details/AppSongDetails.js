@@ -1,13 +1,13 @@
 import {html, LitElement} from 'lit';
 
-import {trackDetailsStyle} from './trackDetailsStyle.js';
+import {songDetailsStyle} from './songDetailsStyle.js';
 import {BASE_PATH, DEFAULT_ERROR_MESSAGE} from '../../util/api.js';
 
-export class AppTrackDetails extends LitElement {
+export class AppSongDetails extends LitElement {
   static get properties() {
     return {
-      trackId: Number,
-      addedTracksIds: Array,
+      songId: Number,
+      addedSongsIds: Array,
       _data: {type: Object, state: true},
       _dataAlbumRecommendations: {type: Array, state: true},
       _dataArtistRecommendations: {type: Array, state: true},
@@ -15,13 +15,13 @@ export class AppTrackDetails extends LitElement {
     };
   }
   static get styles() {
-    return [trackDetailsStyle];
+    return [songDetailsStyle];
   }
 
   constructor() {
     super();
-    this.trackId = null;
-    this.addedTracksIds = [];
+    this.songId = null;
+    this.addedSongsIds = [];
     this._data = null;
     this._dataAlbumRecommendations = [];
     this._dataArtistRecommendations = [];
@@ -29,8 +29,8 @@ export class AppTrackDetails extends LitElement {
 
   updated(_changedProperties) {
     _changedProperties.forEach((oldValue, newValue) => {
-      if (newValue === 'trackId') {
-        this.fetchSongData(this.trackId);
+      if (newValue === 'songId') {
+        this.fetchSongData(this.songId);
       }
     });
   }
@@ -95,7 +95,7 @@ export class AppTrackDetails extends LitElement {
 
   render() {
     const details = this._data
-      ? html`<div class="track-details__info-current">
+      ? html`<div class="song-details__info-current">
           <h1>${this._data.name}</h1>
           <h2>${this._data.artist}</h2>
           <h3>${this._data.album} (${this._data.albumYearOfRelease})</h3>
@@ -107,9 +107,9 @@ export class AppTrackDetails extends LitElement {
         ? html`${this._dataAlbumRecommendations.map(
             (item) => html`
               <app-tile-recommendation
-                  class="track-details__recommendation"
+                  class="song-details__recommendation"
                 .data=${item}
-                .availableToAdd=${!this.addedTracksIds.includes(item.songId)}
+                .availableToAdd=${!this.addedSongsIds.includes(item.songId)}
               ></app-tile-recommendation>
             `
           )}`
@@ -119,25 +119,25 @@ export class AppTrackDetails extends LitElement {
         ? html`${this._dataArtistRecommendations.map(
             (item) => html`
               <app-tile-recommendation
-                  class="track-details__recommendation"
+                  class="song-details__recommendation"
                 .data=${item}
-                .availableToAdd=${!this.addedTracksIds.includes(item.songId)}
+                .availableToAdd=${!this.addedSongsIds.includes(item.songId)}
               ></app-tile-recommendation>
             `
           )}`
         : html`<p>No data</p>`;
 
-    return html`<div class="track-details">
+    return html`<div class="song-details">
       ${details}
-      <div class="track-details__recommendations">
+      <div class="song-details__recommendations">
         <p>More from Artist</p>
-        <div class="track-details__recommendations-list">
+        <div class="song-details__recommendations-list">
           ${artistRecommendations}
         </div>
       </div>
-      <div class="track-details__recommendations">
+      <div class="song-details__recommendations">
         <p>More from Album</p>
-        <div class="track-details__recommendations-list">
+        <div class="song-details__recommendations-list">
           ${albumRecommendations}
         </div>
       </div>
@@ -145,4 +145,4 @@ export class AppTrackDetails extends LitElement {
   }
 }
 
-window.customElements.define('app-track-details', AppTrackDetails);
+window.customElements.define('app-song-details', AppSongDetails);

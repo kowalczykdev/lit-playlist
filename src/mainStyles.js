@@ -14,7 +14,7 @@ export const mainStyles = css`
     grid-template-columns: 2fr 5fr;
   }
 
-  .main__tracks {
+  .main__songs {
     background-color: var(--c-black);
     padding: calc(var(--space) * 4);
     display: flex;

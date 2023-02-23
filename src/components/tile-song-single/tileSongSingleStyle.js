@@ -1,6 +1,6 @@
 import {css} from 'lit';
 
-export const tileTrackSingleStyle = css`
+export const tileSongSingleStyle = css`
   :host {
     display: block;
   }
